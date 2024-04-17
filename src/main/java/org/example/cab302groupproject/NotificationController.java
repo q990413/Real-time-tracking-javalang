@@ -6,10 +6,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
-import java.io.IOException;
 
 public class NotificationController {
     @FXML
