@@ -16,6 +16,5 @@
               wrapText="true"
     />
 
-    <Label fx:id="welcomeText"/>
     <Button text="POPUP" onAction="#onPopupButtonClick"/>
 </VBox>
