@@ -1,4 +1,4 @@
-package org.example.cab302groupproject;
+package org.example.cab302groupproject.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import org.example.cab302groupproject.Model;
 
 import java.io.IOException;
 
