@@ -8,7 +8,7 @@ public class DatabaseInitializer {
     public static void main(String[] args) {
         createNewTable();
         //insert sample data
-        insertUser("Alice", "alice123", "alice@example.com");
+        insertUser("Alicendfer", "alice123", "alice@example.com");
         insertUser("Bob", "bob456", "bob@example.com");
     }
 
@@ -30,7 +30,6 @@ public class DatabaseInitializer {
             System.out.println(e.getMessage());
         }
     }
-
     public static void insertUser(String username, String password, String email) {
         // SQL statement for inserting a new user
         String sql = "INSERT INTO users(username, password, email) VALUES(?,?,?)";
