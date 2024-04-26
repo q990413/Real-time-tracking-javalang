@@ -25,7 +25,7 @@ public class Controller {
     protected void testingNotificationButton() throws IOException {
         Stage stage = (Stage) NotificationTestButton.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Model.class.getResource("Notification.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load(), 320, 440);
         stage.setScene(scene);
     }
 }

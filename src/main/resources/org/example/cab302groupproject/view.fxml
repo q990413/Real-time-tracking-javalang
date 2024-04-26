@@ -14,7 +14,7 @@
     <Label fx:id="welcomeText"/>
     <Button text="Hello!" onAction="#onHelloButtonClick"/>
     <Button fx:id="NotificationTestButton"
-            text="TESTING"
+            text="Alarm"
             onAction="#testingNotificationButton"
             />
 </VBox>
