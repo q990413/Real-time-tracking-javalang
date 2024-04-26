@@ -1,12 +1,12 @@
-package org.example.cab302groupproject.controller;
+package eajteam.cab302groupproject.controller;
 
+import eajteam.cab302groupproject.MainApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import org.example.cab302groupproject.Model;
 
 import java.io.IOException;
 
@@ -24,7 +24,7 @@ public class Controller {
     @FXML
     protected void testingNotificationButton() throws IOException {
         Stage stage = (Stage) NotificationTestButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Model.class.getResource("Notification.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("Notification.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setScene(scene);
     }

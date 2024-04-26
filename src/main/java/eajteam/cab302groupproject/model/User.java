@@ -1,7 +1,7 @@
-package org.example.cab302groupproject.model;
+package eajteam.cab302groupproject.model;
 
 /**
- * A class to model users of the application
+ * A class to model users of the application with a first name, last name, and email address.
  */
 public class User {
     private int id;
