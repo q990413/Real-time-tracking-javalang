@@ -6,16 +6,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
-import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.example.cab302groupproject.Model;
 
 import java.io.IOException;
 
@@ -105,22 +106,6 @@ public class NotificationController {
         popupStage.initOwner(stage);
 
         popupStage.show();
-    }
-    private boolean validateDelayFields() {
-        try {
-            int seconds = Integer.parseInt(secondsField.getText());
-            int minutes = Integer.parseInt(minutesField.getText());
-            int hours = Integer.parseInt(hoursField.getText());
-
-            // Check if any field is empty or contains non-numeric values
-            if (seconds < 0 || minutes < 0 || hours < 0) {
-                return false;
-            }
-
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
     }
 
     private void showErrorPopup(String message) {
