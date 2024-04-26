@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Controller {
+public class LoginController {
     @FXML
     private Label welcomeText;
     @FXML
@@ -24,7 +24,7 @@ public class Controller {
     @FXML
     protected void testingNotificationButton() throws IOException {
         Stage stage = (Stage) NotificationTestButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("Notification.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("notification.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setScene(scene);
     }
