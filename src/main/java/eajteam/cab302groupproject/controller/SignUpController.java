@@ -1,6 +1,6 @@
 package eajteam.cab302groupproject.controller;
 
-import eajteam.cab302groupproject.MainApplication;
+import eajteam.cab302groupproject.TranquilifyApplication;
 import eajteam.cab302groupproject.model.SqliteUserDAO;
 import eajteam.cab302groupproject.model.User;
 import javafx.fxml.FXML;
@@ -80,8 +80,8 @@ public class SignUpController {
 
             // Change scene to login-view
             Stage stage = (Stage) signUpButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), MainApplication.WIDTH, MainApplication.HEIGHT);
+            FXMLLoader fxmlLoader = new FXMLLoader(TranquilifyApplication.class.getResource("login-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), TranquilifyApplication.WIDTH, TranquilifyApplication.HEIGHT);
             stage.setScene(scene);
         } else if (!isValidEmail(email) && (firstName.isEmpty() || lastName.isEmpty())) {
             displayErrorMessage("Form Incomplete", "Please enter your first name, last name, and a valid email " +
@@ -97,8 +97,8 @@ public class SignUpController {
     protected void onSwitchToLoginButtonClick() throws IOException {
         // Change scene to login-view
         Stage stage = (Stage) signUpButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), MainApplication.WIDTH, MainApplication.HEIGHT);
+        FXMLLoader fxmlLoader = new FXMLLoader(TranquilifyApplication.class.getResource("login-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), TranquilifyApplication.WIDTH, TranquilifyApplication.HEIGHT);
         stage.setScene(scene);
     }
 
