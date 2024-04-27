@@ -25,7 +25,6 @@ public class TranquilifyApplication extends Application {
     }
 
     public static void main(String[] args) {
-        //SendEmail send = new SendEmail("emersonsmall8@gmail.com", "testsubject", "testbody");
         launch();
     }
 }

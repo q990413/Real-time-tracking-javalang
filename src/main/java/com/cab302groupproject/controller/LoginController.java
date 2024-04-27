@@ -21,16 +21,15 @@ public class LoginController {
     protected void onLoginButtonClick() throws IOException {
         String email = emailTextField.getText();
 
-        // Validate user input
         if (SignUpController.isValidEmail(email)) {
             // Authenticate user
-            AuthService.login(email);
-
-            // Change scene to main view if authenticated
-            Stage stage = (Stage) loginButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(TranquilifyApplication.class.getResource("main-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), TranquilifyApplication.WIDTH, TranquilifyApplication.HEIGHT);
-            stage.setScene(scene);
+            if (AuthService.login(email) != null) {
+                // Change scene to main view
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                FXMLLoader fxmlLoader = new FXMLLoader(TranquilifyApplication.class.getResource("main-view.fxml"));
+                Scene scene = new Scene(fxmlLoader.load(), TranquilifyApplication.WIDTH, TranquilifyApplication.HEIGHT);
+                stage.setScene(scene);
+            };
         } else {
             SignUpController.displayErrorMessage("Invalid Email Address", "Please enter a valid email address.");
         }
