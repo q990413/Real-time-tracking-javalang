@@ -1,4 +1,4 @@
-package eajteam.cab302groupproject.model;
+package com.cab302groupproject.model;
 
 /**
  * A class to model users of the application with a first name, last name, and email address.

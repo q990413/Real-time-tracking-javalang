@@ -1,11 +1,13 @@
-package eajteam.cab302groupproject;
+package com.cab302groupproject;
 
+import com.cab302groupproject.model.SendEmail;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.file.SecureDirectoryStream;
 
 public class TranquilifyApplication extends Application {
     // Constants defining the window title and size
@@ -23,6 +25,7 @@ public class TranquilifyApplication extends Application {
     }
 
     public static void main(String[] args) {
+        //SendEmail send = new SendEmail("emersonsmall8@gmail.com", "testsubject", "testbody");
         launch();
     }
 }

@@ -1,8 +1,8 @@
-package eajteam.cab302groupproject.controller;
+package com.cab302groupproject.controller;
 
-import eajteam.cab302groupproject.TranquilifyApplication;
-import eajteam.cab302groupproject.model.SqliteUserDAO;
-import eajteam.cab302groupproject.model.User;
+import com.cab302groupproject.TranquilifyApplication;
+import com.cab302groupproject.model.SqliteUserDAO;
+import com.cab302groupproject.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

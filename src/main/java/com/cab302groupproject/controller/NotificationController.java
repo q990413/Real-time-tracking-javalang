@@ -1,4 +1,4 @@
-package eajteam.cab302groupproject.controller;
+package com.cab302groupproject.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
