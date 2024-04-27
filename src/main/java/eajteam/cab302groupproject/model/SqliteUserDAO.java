@@ -84,15 +84,15 @@ public class SqliteUserDAO {
         }
     }
 
-    public User getUser(int id) {
+    public User getUser(String email) {
         try {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?");
-            statement.setInt(1, id);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
+            statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
+                int id = resultSet.getInt(1);
                 String firstName = resultSet.getString(2);
                 String lastName = resultSet.getString(3);
-                String email = resultSet.getString(4);
                 User user = new User(firstName, lastName, email);
                 user.setId(id);
                 return user;

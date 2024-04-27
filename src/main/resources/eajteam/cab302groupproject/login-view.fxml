@@ -5,16 +5,41 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<VBox alignment="TOP_CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="eajteam.cab302groupproject.controller.LoginController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-    <Button fx:id="NotificationTestButton"
-            text="TESTING"
-            onAction="#testingNotificationButton"
-            />
+    <Label text="Login">
+        <font>
+            <Font size="22.0"/>
+        </font>
+    </Label>
+    <GridPane hgap="5.0" vgap="5.0" alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints minWidth="40"/>
+            <ColumnConstraints minWidth="200"/>
+        </columnConstraints>
+        <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="emailTextField" promptText="johnsmith@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    </GridPane>
+    <HBox spacing="10.0" alignment="CENTER">
+        <Button fx:id="cancelButton"
+                text="Cancel"
+                onAction="#onCancelButtonClick"/>
+        <Button fx:id="loginButton"
+                text="Login"
+                onAction="#onLoginButtonClick"/>
+        <Button fx:id="switchToSignUpButton"
+                text="Sign Up Instead"
+                onAction="#onSwitchToSignUpButtonClick"/>
+    </HBox>
 </VBox>

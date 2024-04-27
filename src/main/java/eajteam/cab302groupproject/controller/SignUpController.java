@@ -28,6 +28,7 @@ public class SignUpController {
         userDAO = new SqliteUserDAO();
     }
 
+    // ---START HELPER METHODS---
     UnaryOperator<TextFormatter.Change> nameValidationFormatter = change -> {
         if (change.getText().matches("[a-zA-Z' -]+")) {
             return change; // If change is typical char used in english name
@@ -41,9 +42,18 @@ public class SignUpController {
         }
     };
 
-    public boolean isValidEmail(String email) {
+    public static boolean isValidEmail(String email) {
         return email.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
     }
+
+    public static void displayErrorMessage(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+    // ---END HELPER METHODS---
 
     @FXML
     public void initialize() {
@@ -58,25 +68,28 @@ public class SignUpController {
 
     @FXML
     protected void onSignUpButtonClick() throws IOException {
-        if (isValidEmail(emailTextField.getText())) {
+        String email = emailTextField.getText();
+        String firstName = firstNameTextField.getText();
+        String lastName = lastNameTextField.getText();
+
+        // Validate user input
+        if (isValidEmail(email) && !firstName.isEmpty() && !lastName.isEmpty()) {
             // Add new user to database
-            User user = new User(firstNameTextField.getText(), lastNameTextField.getText(), emailTextField.getText());
-            try {
-                userDAO.addUser(user);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            User user = new User(firstName, lastName, email);
+            userDAO.addUser(user);
+
             // Change scene to login-view
             Stage stage = (Stage) signUpButton.getScene().getWindow();
             FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("login-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), MainApplication.WIDTH, MainApplication.HEIGHT);
             stage.setScene(scene);
-        } else { // Display error message
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Invalid Email Address");
-            alert.setHeaderText(null);
-            alert.setContentText("Please enter a valid email address.");
-            alert.showAndWait();
+        } else if (!isValidEmail(email) && (firstName.isEmpty() || lastName.isEmpty())) {
+            displayErrorMessage("Form Incomplete", "Please enter your first name, last name, and a valid email " +
+                    "address.");
+        } else if (firstName.isEmpty() || lastName.isEmpty()) {
+            displayErrorMessage("Name Field Empty", "Please enter your first name and last name.");
+        } else { // Email address must be only incorrect/empty field
+            displayErrorMessage("Invalid Email Address", "Please enter a valid email address.");
         }
     }
 
