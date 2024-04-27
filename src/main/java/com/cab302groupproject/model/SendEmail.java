@@ -6,13 +6,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendEmail {
-    final String senderEmail = "tranquilify1@gmail.com";
-    final String senderPassword = "ihghdadzwrakwskb";
-    final String host = "smtp.gmail.com";
-    final String emailServerPort = "465"; // For gmail
-    String receiverEmail;
-    String emailSubject;
-    String emailBody;
+    private final String senderEmail = "tranquilify1@gmail.com";
+    private final String senderPassword = "ihghdadzwrakwskb";
+    private final String host = "smtp.gmail.com";
+    private final String emailServerPort = "465"; // For gmail
+    private String receiverEmail;
+    private String emailSubject;
+    private String emailBody;
 
     public SendEmail(String receiverEmail, String subject, String body) {
         this.receiverEmail = receiverEmail;

@@ -1,15 +1,22 @@
 package com.cab302groupproject.model;
 
+import java.io.IOException;
 import java.util.Optional;
 import java.util.Random;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 
 import static com.cab302groupproject.controller.SignUpController.displayErrorMessage;
+import static com.cab302groupproject.controller.SignUpController.isValidEmail;
 
 public class AuthService {
     private static SqliteUserDAO userDAO = new SqliteUserDAO();
 
     public static User login(String email) {
+        email = email.toLowerCase();
+
         // Generate code
         Random rand = new Random();
         String code = String.format("%04d", rand.nextInt(10000));
@@ -39,7 +46,32 @@ public class AuthService {
         } else {
             displayErrorMessage("Incorrect Login Code", "The login code you entered was incorrect.");
         }
-
         return null;
+    }
+
+    public static boolean signUp(String firstName, String lastName, String email) throws IOException {
+        email = email.toLowerCase();
+
+        // Validate user input
+        if (userDAO.getUser(email) != null) {
+            displayErrorMessage("Account Already Exists", "The email address you entered is already associated" +
+                    " with an existing account.");
+            return false;
+        } else if (isValidEmail(email) && !firstName.isEmpty() && !lastName.isEmpty()) {
+            // Add new user to database
+            User user = new User(firstName, lastName, email);
+            userDAO.addUser(user);
+            return true;
+        } else if (!isValidEmail(email) && (firstName.isEmpty() || lastName.isEmpty())) {
+            displayErrorMessage("Form Incomplete", "Please enter your first name, last name, and a valid email " +
+                    "address.");
+            return false;
+        } else if (firstName.isEmpty() || lastName.isEmpty()) {
+            displayErrorMessage("Name Field Empty", "Please enter your first name and last name.");
+            return false;
+        } else { // Email address must be only incorrect/empty field
+            displayErrorMessage("Invalid Email Address", "Please enter a valid email address.");
+            return false;
+        }
     }
 }
