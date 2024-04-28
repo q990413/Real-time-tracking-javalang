@@ -8,20 +8,11 @@ import javax.mail.internet.MimeMessage;
 public class SendEmail {
     private final String senderEmail = "tranquilify1@gmail.com";
     private final String senderPassword = "ihghdadzwrakwskb";
-    private final String host = "smtp.gmail.com";
-    private final String emailServerPort = "465"; // For gmail
-    private String receiverEmail;
-    private String emailSubject;
-    private String emailBody;
 
-    public SendEmail(String receiverEmail, String subject, String body) {
-        this.receiverEmail = receiverEmail;
-        this.emailSubject = subject;
-        this.emailBody = body;
-
+    public SendEmail(String receiverEmail, String emailSubject, String emailBody) {
         Properties props = System.getProperties(); // Contains host info
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", "465");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "465"); // For gmail
         props.put("mail.smtp.ssl.enable", "true");
         props.put("mail.smtp.auth", "true");
 
