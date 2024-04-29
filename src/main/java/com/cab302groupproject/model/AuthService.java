@@ -3,9 +3,6 @@ package com.cab302groupproject.model;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Random;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 
 import static com.cab302groupproject.controller.SignUpController.displayErrorMessage;
@@ -25,8 +22,9 @@ public class AuthService {
         // Email code if user exists in database
         User user = userDAO.getUser(email);
         if (user != null) {
-            new SendEmail(email, "Tranquilify Login Code", "Your Tranquilify login code is: " + code);
+            new SendEmail(email, code);
         } else {
+            //System.out.println("Email address not in database.");
             return null;
         }
 

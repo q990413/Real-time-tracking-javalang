@@ -9,7 +9,7 @@ public class SendEmail {
     private final String senderEmail = "tranquilify1@gmail.com";
     private final String senderPassword = "ihghdadzwrakwskb";
 
-    public SendEmail(String receiverEmail, String emailSubject, String emailBody) {
+    public SendEmail(String receiverEmail, String code) {
         Properties props = System.getProperties(); // Contains host info
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "465"); // For gmail
@@ -23,8 +23,8 @@ public class SendEmail {
         });
         try {
             MimeMessage msg = new MimeMessage(session);
-            msg.setText(emailBody);
-            msg.setSubject(emailSubject);
+            msg.setText("Your Tranquilify login code is: " + code);
+            msg.setSubject("Tranquilify Login Code");
             msg.setFrom(new InternetAddress(senderEmail));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(receiverEmail));
             Transport.send(msg);

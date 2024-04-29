@@ -22,7 +22,6 @@ public class LoginController {
         String email = emailTextField.getText();
 
         if (SignUpController.isValidEmail(email)) {
-            // Authenticate user
             if (AuthService.login(email) != null) {
                 // Change scene to main view
                 Stage stage = (Stage) loginButton.getScene().getWindow();
