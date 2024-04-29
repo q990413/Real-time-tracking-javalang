@@ -6,10 +6,16 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class SendEmail {
-    private final String senderEmail = "tranquilify1@gmail.com";
-    private final String senderPassword = "ihghdadzwrakwskb";
+    private static final String senderEmail = "tranquilify1@gmail.com";
+    private static final String senderPassword = "ihghdadzwrakwskb";
 
-    public SendEmail(String receiverEmail, String code) {
+    /**
+     * Sends an email with the given login code to the given email address.
+     * @param receiverEmail The email address of the recipient.
+     * @param strCode The login code to be emailed.
+     * @return True if the email was successfully sent, or false otherwise.
+     */
+    public static void sendEmail(String receiverEmail, String strCode) {
         Properties props = System.getProperties(); // Contains host info
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "465"); // For gmail
@@ -23,7 +29,7 @@ public class SendEmail {
         });
         try {
             MimeMessage msg = new MimeMessage(session);
-            msg.setText("Your Tranquilify login code is: " + code);
+            msg.setText("Your Tranquilify login code is: " + strCode);
             msg.setSubject("Tranquilify Login Code");
             msg.setFrom(new InternetAddress(senderEmail));
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(receiverEmail));

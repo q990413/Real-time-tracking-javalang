@@ -12,6 +12,9 @@ import java.util.function.UnaryOperator;
 
 import static com.cab302groupproject.model.AuthService.signUp;
 
+/**
+ * A controller class for the sign-up-view FXML file.
+ */
 public class SignUpController {
     @FXML
     private CheckBox agreeCheckBox;
@@ -25,12 +28,22 @@ public class SignUpController {
     private TextField emailTextField;
     private SqliteUserDAO userDAO;
 
+    /**
+     * Constructor that retrieves a
+     */
     public SignUpController() {
         userDAO = new SqliteUserDAO();
     }
 
     // ---START HELPER METHODS---
     //TODO: Move to Utility class
+
+    /**
+     * Validates the given email address against a regex pattern that captures most valid email addresses (source:
+     * https://emailregex.com/).
+     * @param email The email address to be validated.
+     * @return True if given email is a valid email address, or false otherwise.
+     */
     public static boolean isValidEmail(String email) {
         return email.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x" +
                 "08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:" +
@@ -39,6 +52,11 @@ public class SignUpController {
                 "c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
     }
 
+    /**
+     * Displays a JavaFX popup window alert with the given title as the window title, and the given content as the message.
+     * @param title The title of the popup window.
+     * @param content The text content of the popup window.
+     */
     public static void displayErrorMessage(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

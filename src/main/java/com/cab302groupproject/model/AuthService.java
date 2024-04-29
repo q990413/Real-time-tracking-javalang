@@ -7,39 +7,50 @@ import javafx.scene.control.TextInputDialog;
 
 import static com.cab302groupproject.controller.SignUpController.displayErrorMessage;
 import static com.cab302groupproject.controller.SignUpController.isValidEmail;
+import static com.cab302groupproject.model.SendEmail.sendEmail;
 
+/**
+ * A class for authenticating users.
+ */
 public class AuthService {
     private static SqliteUserDAO userDAO = new SqliteUserDAO();
 
+    /**
+     * Returns the User object associated with the given email address if the user is authenticated.
+     * @param email The email address of the user.
+     * @return The User object associated with the given email address.
+     */
     public static User login(String email) {
         email = email.toLowerCase();
 
         // Generate code
         Random rand = new Random();
-        String code = String.format("%04d", rand.nextInt(10000));
+        String strCode = String.format("%04d", rand.nextInt(10000));
         // TODO: Make code expire after x minutes (code currently lasts forever as long as a new instance isn't started).
 
         // Email code if user exists in database
         User user = userDAO.getUser(email);
         if (user != null) {
-            new SendEmail(email, code);
+            sendEmail(email, strCode);
         } else {
             //System.out.println("Email address not in database.");
             return null;
         }
 
         // Create popup to enter code
+        // TODO: Make popup only accept 4 digits
         Integer enteredCode = -1;
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Login Code");
         dialog.setHeaderText("Please enter your login code");
         // Get response value
         Optional<String> result = dialog.showAndWait();
-        if (result.isPresent()){
+        if (result.isPresent()) {
             enteredCode = Integer.parseInt(result.get());
         }
 
-        if (enteredCode.equals(Integer.parseInt(code))) {
+        Integer intCode = Integer.parseInt(strCode);
+        if (enteredCode.equals(intCode)) {
             return user;
         } else {
             displayErrorMessage("Incorrect Login Code", "The login code you entered was incorrect.");
@@ -47,7 +58,14 @@ public class AuthService {
         return null;
     }
 
-    public static boolean signUp(String firstName, String lastName, String email) throws IOException {
+    /**
+     * Adds a new user to the database if the given first name, last name, and email address are valid.
+     * @param firstName The first name of the user.
+     * @param lastName The last name of the user.
+     * @param email The email address of the user.
+     * @return True if a new user was added to the database, and false otherwise.
+     */
+    public static boolean signUp(String firstName, String lastName, String email) {
         email = email.toLowerCase();
 
         // Validate user input

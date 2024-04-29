@@ -11,7 +11,7 @@ public class SqliteConnection {
     private static Connection instance = null;
 
     /**
-     * Establishes a connection to the users.db database, or prints an error to the console otherwise
+     * Establishes a connection to the users.db database, or prints an error to the console otherwise.
      */
     private SqliteConnection() {
         String url = "jdbc:sqlite:users.db";
@@ -22,6 +22,10 @@ public class SqliteConnection {
         }
     }
 
+    /**
+     * Returns a new connection to the database if none exists, or the existing connection if it already exists.
+     * @return Connection
+     */
     public static Connection getInstance() {
         if (instance == null) {
             new SqliteConnection();

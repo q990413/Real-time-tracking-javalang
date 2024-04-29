@@ -16,8 +16,10 @@ public class SqliteUserDAO {
         createTable();
     }
 
+    /**
+     * Creates a table named users within the users.db database.
+     */
     private void createTable() {
-        // Create table if not exists
         try {
             Statement statement = connection.createStatement();
             String query = "CREATE TABLE IF NOT EXISTS users ("
