@@ -1,4 +1,4 @@
-package org.example.cab302groupproject.model;
+package com.cab302groupproject.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

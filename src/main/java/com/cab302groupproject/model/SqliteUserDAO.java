@@ -1,7 +1,7 @@
-package org.example.cab302groupproject.model;
+package com.cab302groupproject.model;
 import java.sql.*;
 
-public class DatabaseInitializer {
+public class SqliteUserDAO {
 
     private static final String URL = "jdbc:sqlite:userinfo"; //
 

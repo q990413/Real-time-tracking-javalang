@@ -1,11 +1,11 @@
-package org.example.cab302groupproject.model;
+package com.cab302groupproject.model;
 
-public class UserDetails {
+public class User {
     private String username;
     private String password;
     private String email;
 
-    public UserDetails(String username, String password, String email){
+    public User(String username, String password, String email){
         this.username = username;
 
         this.password = password;

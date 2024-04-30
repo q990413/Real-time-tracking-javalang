@@ -1,4 +1,4 @@
-package org.example.cab302groupproject.controller;
+package com.cab302groupproject.controller;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -16,7 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.example.cab302groupproject.Model;
+import com.cab302groupproject.HelloApplication;
 
 import java.io.IOException;
 
@@ -58,7 +58,7 @@ public class NotificationController {
     @FXML
     protected void onNotificationBackButton() throws IOException {
         Stage stage = (Stage) NotificationBackButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Model.class.getResource("view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setScene(scene);
     }
