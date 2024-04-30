@@ -28,16 +28,12 @@ public class LoginController {
     protected void onLoginButtonClick() throws IOException {
         String email = emailTextField.getText();
 
-        if (SignUpController.isValidEmail(email)) {
-            if (AuthService.login(email) != null) {
-                // Change scene to main view
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                FXMLLoader fxmlLoader = new FXMLLoader(TranquilifyApplication.class.getResource("main-view.fxml"));
-                Scene scene = new Scene(fxmlLoader.load(), TranquilifyApplication.WIDTH, TranquilifyApplication.HEIGHT);
-                stage.setScene(scene);
-            };
-        } else {
-            SignUpController.displayErrorMessage("Invalid Email Address", "Please enter a valid email address.");
+        if (AuthService.login(email) != null) {
+            // Change scene to main view
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(TranquilifyApplication.class.getResource("main-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+            stage.setScene(scene);
         }
     }
 

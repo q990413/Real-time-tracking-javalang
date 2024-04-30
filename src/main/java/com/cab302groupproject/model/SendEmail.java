@@ -16,7 +16,6 @@ public class SendEmail {
      * Sends an email with the given login code to the given email address.
      * @param receiverEmail The email address of the recipient.
      * @param strCode The login code to be emailed.
-     * @return True if the email was successfully sent, or false otherwise.
      */
     public static void sendEmail(String receiverEmail, String strCode) {
         Properties props = System.getProperties(); // Contains host info

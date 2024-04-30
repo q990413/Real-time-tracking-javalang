@@ -1,13 +1,11 @@
 package com.cab302groupproject;
 
-import com.cab302groupproject.model.SendEmail;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.nio.file.SecureDirectoryStream;
 
 public class TranquilifyApplication extends Application {
     // Constants defining the window title and size
