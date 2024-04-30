@@ -8,7 +8,7 @@ import java.sql.Statement;
 /**
  * A class to create a data access object for the User class.
  */
-public class SqliteUserDAO {
+public class SqliteUserDAO implements IUserDAO {
     private Connection connection;
 
     public SqliteUserDAO() {
@@ -17,7 +17,7 @@ public class SqliteUserDAO {
     }
 
     /**
-     * Creates a table named users within the users.db database.
+     * Creates a table named users if it doesn't exist.
      */
     private void createTable() {
         try {
@@ -34,10 +34,7 @@ public class SqliteUserDAO {
         }
     }
 
-    /**
-     * Adds a new user to the users database.
-     * @param user The user to be added
-     */
+    @Override
     public void addUser(User user) {
         try {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO users (firstName, lastName, email) VALUES (?, ?, ?)");
@@ -55,10 +52,7 @@ public class SqliteUserDAO {
         }
     }
 
-    /**
-     * Updates an existing user in the users database.
-     * @param user The user to be updated
-     */
+    @Override
     public void updateUser(User user) {
         try {
             PreparedStatement statement = connection.prepareStatement("UPDATE users SET firstName = ?, lastName = ?, email = ? WHERE id = ?");
@@ -72,10 +66,7 @@ public class SqliteUserDAO {
         }
     }
 
-    /**
-     * Deletes an existing user from the users database.
-     * @param user The user to be deleted
-     */
+    @Override
     public void deleteUser(User user) {
         try {
             PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
@@ -86,6 +77,7 @@ public class SqliteUserDAO {
         }
     }
 
+    @Override
     public User getUser(String email) {
         try {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ?");

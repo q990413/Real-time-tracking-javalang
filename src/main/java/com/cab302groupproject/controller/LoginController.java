@@ -11,12 +11,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * A controller class for the login-view.fxml file.
+ */
 public class LoginController {
     @FXML
     private Button loginButton;
     @FXML
     private TextField emailTextField;
 
+    /**
+     * Attempts to sign the user in with the entered info.
+     * @throws IOException
+     */
     @FXML
     protected void onLoginButtonClick() throws IOException {
         String email = emailTextField.getText();
@@ -34,6 +41,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * Changes the view to the sign-up-view.fxml file when the Switch to Sign Up button is clicked.
+     * @throws IOException
+     */
     @FXML
     protected void onSwitchToSignUpButtonClick() throws IOException {
         // Change scene to sign up view
@@ -43,6 +54,9 @@ public class LoginController {
         stage.setScene(scene);
     }
 
+    /**
+     * Closes the application when the Cancel button is clicked.
+     */
     @FXML
     protected void onCancelButtonClick() {
         System.exit(0);

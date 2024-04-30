@@ -1,7 +1,6 @@
 package com.cab302groupproject.controller;
 
 import com.cab302groupproject.TranquilifyApplication;
-import com.cab302groupproject.model.SqliteUserDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +12,7 @@ import java.util.function.UnaryOperator;
 import static com.cab302groupproject.model.AuthService.signUp;
 
 /**
- * A controller class for the sign-up-view FXML file.
+ * A controller class for the sign-up-view.fxml file.
  */
 public class SignUpController {
     @FXML
@@ -26,14 +25,6 @@ public class SignUpController {
     private TextField lastNameTextField;
     @FXML
     private TextField emailTextField;
-    private SqliteUserDAO userDAO;
-
-    /**
-     * Constructor that retrieves a
-     */
-    public SignUpController() {
-        userDAO = new SqliteUserDAO();
-    }
 
     // ---START HELPER METHODS---
     //TODO: Move to Utility class
@@ -66,6 +57,9 @@ public class SignUpController {
     }
     // ---END HELPER METHODS---
 
+    /**
+     * Only allows characters that are common for english names to be entered in a text field.
+     */
     UnaryOperator<TextFormatter.Change> nameValidationFormatter = change -> {
         if (change.getText().matches("[a-zA-Z' -]+")) {
             return change; // If change is typical char used in english name
@@ -79,17 +73,28 @@ public class SignUpController {
         }
     };
 
+    /**
+     * Initialisation function that applies the nameValidationFormatter function to both name text fields so that invalid
+     * characters cannot be entered.
+     */
     @FXML
     public void initialize() {
         firstNameTextField.setTextFormatter(new TextFormatter<>(nameValidationFormatter));
         lastNameTextField.setTextFormatter(new TextFormatter<>(nameValidationFormatter));
     }
 
+    /**
+     * Closes the application when the Cancel button is clicked.
+     */
     @FXML
     protected void onCancelButtonClick() {
         System.exit(0);
     }
 
+    /**
+     * Attempts to add a new user to the database with the entered info when the Sign Up button is clicked.
+     * @throws IOException
+     */
     @FXML
     protected void onSignUpButtonClick() throws IOException {
         String firstName = firstNameTextField.getText();
@@ -106,6 +111,10 @@ public class SignUpController {
         }
     }
 
+    /**
+     * Changes the view to the login-view.fxml file when the Switch to Login button is clicked.
+     * @throws IOException
+     */
     @FXML
     protected void onSwitchToLoginButtonClick() throws IOException {
         // Change scene to login-view
@@ -115,6 +124,9 @@ public class SignUpController {
         stage.setScene(scene);
     }
 
+    /**
+     * Enables the Sign Up button when the Agree Checkbox is ticked, and disables it otherwise.
+     */
     @FXML
     protected void onAgreeCheckBoxClick() {
         boolean accepted = agreeCheckBox.isSelected();

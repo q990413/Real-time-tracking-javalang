@@ -5,6 +5,9 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+/**
+ * A class to send an email.
+ */
 public class SendEmail {
     private static final String senderEmail = "tranquilify1@gmail.com";
     private static final String senderPassword = "ihghdadzwrakwskb";
