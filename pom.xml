@@ -74,8 +74,7 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.example.cab302groupproject/com.cab302groupproject.TranquilifyApplication
-                            </mainClass>
+                            <mainClass>com.cab302groupproject.TranquilifyApplication</mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
                             <jlinkImageName>app</jlinkImageName>
