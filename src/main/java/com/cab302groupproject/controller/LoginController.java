@@ -31,7 +31,7 @@ public class LoginController {
         if (AuthService.login(email) != null) {
             // Change scene to main view
             Stage stage = (Stage) loginButton.getScene().getWindow();
-            FXMLLoader fxmlLoader = new FXMLLoader(TranquilifyApplication.class.getResource("main-view.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(TranquilifyApplication.class.getResource("homepage-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
             stage.setMaximized(true);
             stage.setScene(scene);

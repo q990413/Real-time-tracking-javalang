@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <VBox xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.cab302groupproject.controller.MainController"
+            fx:controller="com.cab302groupproject.controller.HomepageController"
             alignment="CENTER">
-    <Label text="MAIN PAGE">
+    <Label text="HOMEPAGE">
         <font>
             <Font size="22.0"/>
         </font>

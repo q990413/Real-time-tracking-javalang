@@ -60,7 +60,7 @@ public class AuthService {
             if (user != null) {
                 sendEmail(email, strCode);
             } else {
-                //System.out.println("Email address not in database.");
+                System.out.println("Email address not in database.");
                 return null;
             }
 

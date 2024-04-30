@@ -1,4 +1,4 @@
 package com.cab302groupproject.controller;
 
-public class MainController {
+public class HomepageController {
 }
