@@ -1,4 +1,4 @@
-module eajteam.cab302groupproject {
+module com.cab302groupproject {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
