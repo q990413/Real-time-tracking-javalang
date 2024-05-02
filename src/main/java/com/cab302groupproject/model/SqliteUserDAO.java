@@ -1,52 +1,99 @@
 package com.cab302groupproject.model;
-import java.sql.*;
 
-public class SqliteUserDAO {
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
-    private static final String URL = "jdbc:sqlite:userinfo"; //
+/**
+ * A class to create a data access object for the User class.
+ */
+public class SqliteUserDAO implements IUserDAO {
+    private Connection connection;
 
-    public static void main(String[] args) {
-        createNewTable();
-        //insert sample data
-        insertUser("Alicendfer", "alice123", "alice@example.com");
-        insertUser("Bob", "bob456", "bob@example.com");
+    public SqliteUserDAO() {
+        connection = SqliteConnection.getInstance();
+        createTable();
     }
 
-    public static void createNewTable() {
-        // SQL statement for creating a new table
-        String sql = "CREATE TABLE IF NOT EXISTS users (\n"
-                + " id integer PRIMARY KEY AUTOINCREMENT,\n"
-                + " username text NOT NULL UNIQUE,\n"
-                + " password text NOT NULL,\n"
-                + " email text\n"
-                + ");";
-
-        try (Connection conn = DriverManager.getConnection(URL);
-             Statement stmt = conn.createStatement()) {
-            // create a new table
-            stmt.execute(sql);
-            System.out.println("Table 'users' created successfully.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    /**
+     * Creates a table named users if it doesn't exist.
+     */
+    private void createTable() {
+        try {
+            Statement statement = connection.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS users ("
+                    + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + "firstName VARCHAR NOT NULL,"
+                    + "lastName VARCHAR NOT NULL,"
+                    + "email VARCHAR NOT NULL UNIQUE"
+                    + ")";
+            statement.execute(query);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-    public static void insertUser(String username, String password, String email) {
-        // SQL statement for inserting a new user
-        String sql = "INSERT INTO users(username, password, email) VALUES(?,?,?)";
 
-        try (Connection conn = DriverManager.getConnection(URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            ((PreparedStatement) pstmt).setString(1, username);
-            pstmt.setString(2, password);
-            pstmt.setString(3, email);
-            int affectedRows = pstmt.executeUpdate();
-            if (affectedRows > 0) {
-                System.out.println("User " + username + " inserted successfully.");
+    @Override
+    public void addUser(User user) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (firstName, lastName, email) VALUES (?, ?, ?)");
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getEmail());
+            statement.executeUpdate();
+            // Set the id of the new user
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                user.setId(generatedKeys.getInt(1));
             }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    @Override
+    public void updateUser(User user) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("UPDATE users SET firstName = ?, lastName = ?, email = ? WHERE id = ?");
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getEmail());
+            statement.setInt(4, user.getId());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteUser(User user) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM users WHERE id = ?");
+            statement.setInt(1, user.getId());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public User getUser(String email) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                String firstName = resultSet.getString(2);
+                String lastName = resultSet.getString(3);
+                User user = new User(firstName, lastName, email);
+                user.setId(id);
+                return user;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
-
-

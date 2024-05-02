@@ -24,6 +24,7 @@ public class NotificationController {
     @FXML
     private TextArea notificationWords;
     private Stage stage;
+
     private Timeline timeline;
     @FXML
     private TextField secondsField;
@@ -45,6 +46,14 @@ public class NotificationController {
 
     @FXML
     protected void onPopupButtonClick() {
+        Stage popupStage = new Stage();
+        VBox popupRoot = new VBox();
+        Label label = new Label(notificationWords.getText());
+        popupRoot.getChildren().add(label);
+        Scene scene = new Scene(popupRoot, 200, 100);
+
+        popupStage.setTitle("Popup");
+      
         int delayInSeconds = calculateDelayInSeconds();
         if (delayInSeconds < 0) {
             showErrorPopup("Please fill in valid delay values.");
