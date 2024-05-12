@@ -32,9 +32,6 @@
               text="I agree to the terms and conditions."
               onAction="#onAgreeCheckBoxClick"/>
     <HBox spacing="10.0" alignment="CENTER">
-        <Button fx:id="cancelButton"
-                text="Cancel"
-                onAction="#onCancelButtonClick"/>
         <Button fx:id="signUpButton"
                 text="Sign Up"
                 onAction="#onSignUpButtonClick"

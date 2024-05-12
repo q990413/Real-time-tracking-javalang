@@ -11,9 +11,10 @@ public class User {
 
     /**
      * Constructs a new user object given a first name, last name, and email address.
+     *
      * @param firstName The first name of the user
-     * @param lastName The last name of the user
-     * @param email The email address of the user
+     * @param lastName  The last name of the user
+     * @param email     The email address of the user
      */
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
@@ -56,3 +57,4 @@ public class User {
     public String getFullName() {
         return firstName + " " + lastName;
     }
+}

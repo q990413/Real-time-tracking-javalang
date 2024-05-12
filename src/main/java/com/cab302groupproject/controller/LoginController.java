@@ -50,12 +50,4 @@ public class LoginController {
         Scene scene = new Scene(fxmlLoader.load(), TranquilifyApplication.WIDTH, TranquilifyApplication.HEIGHT);
         stage.setScene(scene);
     }
-
-    /**
-     * Closes the application when the Cancel button is clicked.
-     */
-    @FXML
-    protected void onCancelButtonClick() {
-        System.exit(0);
-    }
 }
