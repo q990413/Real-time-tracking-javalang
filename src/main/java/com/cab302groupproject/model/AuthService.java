@@ -33,7 +33,7 @@ public class AuthService {
      * @param title The title of the popup window.
      * @param content The text content of the popup window.
      */
-    private static void displayErrorMessage(String title, String content) {
+    public static void displayErrorMessage(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -58,6 +58,7 @@ public class AuthService {
             // Email code if user exists in database
             User user = userDAO.getUser(email);
             if (user != null) {
+                //TODO: Use thread
                 sendEmail(email, strCode);
             } else {
                 System.out.println("Email address not in database.");

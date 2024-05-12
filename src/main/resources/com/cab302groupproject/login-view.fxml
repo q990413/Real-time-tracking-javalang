@@ -30,9 +30,6 @@
         <TextField fx:id="emailTextField" promptText="johnsmith@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     </GridPane>
     <HBox spacing="10.0" alignment="CENTER">
-        <Button fx:id="cancelButton"
-                text="Cancel"
-                onAction="#onCancelButtonClick"/>
         <Button fx:id="loginButton"
                 text="Login"
                 onAction="#onLoginButtonClick"/>

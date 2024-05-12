@@ -1,5 +1,6 @@
 package com.cab302groupproject.controller;
 
+import com.cab302groupproject.TranquilifyApplication;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -7,24 +8,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import com.cab302groupproject.HelloApplication;
 
 import java.io.IOException;
 
-public class NotificationController {
-    @FXML
-    private TextArea notificationWords;
-    private Stage stage;
+import static com.cab302groupproject.model.AuthService.displayErrorMessage;
 
+public class NotificationMenuController {
+    @FXML
+    private TextArea notificationText;
     private Timeline timeline;
     @FXML
     private TextField secondsField;
@@ -33,41 +30,29 @@ public class NotificationController {
     @FXML
     private TextField hoursField;
     @FXML
-    private Button NotificationBackButton;
+    private Button notificationBackButton;
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
+    private Stage stage;
 
     @FXML
     public void initialize() {
-        notificationWords.setText("WRITE HERE FOR POPUP WINDOW");
+        notificationText.setText("Take a 10 minute break...");
     }
 
     @FXML
-    protected void onPopupButtonClick() {
-        Stage popupStage = new Stage();
-        VBox popupRoot = new VBox();
-        Label label = new Label(notificationWords.getText());
-        popupRoot.getChildren().add(label);
-        Scene scene = new Scene(popupRoot, 200, 100);
-
-        popupStage.setTitle("Popup");
-      
+    protected void onSetNotificationButtonClick() {
         int delayInSeconds = calculateDelayInSeconds();
-        if (delayInSeconds < 0) {
-            showErrorPopup("Please fill in valid delay values.");
-        } else if (delayInSeconds == 0) {
-            showErrorPopup("Delay should be greater than 0.");
+        if (delayInSeconds <= 0) {
+            displayErrorMessage("Invalid Input", "Please fill in valid delay values.");
         } else {
             startPopupAfterDelay(delayInSeconds);
         }
     }
 
     @FXML
-    protected void onNotificationBackButton() throws IOException {
-        Stage stage = (Stage) NotificationBackButton.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+    protected void onNotificationBackButtonClick() throws IOException {
+        Stage stage = (Stage) notificationBackButton.getScene().getWindow();
+        FXMLLoader fxmlLoader = new FXMLLoader(TranquilifyApplication.class.getResource("homepage-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setScene(scene);
     }
@@ -94,7 +79,7 @@ public class NotificationController {
     }
 
     private void showPopup() {
-        Label label = new Label(notificationWords.getText());
+        Label label = new Label(notificationText.getText());
         label.setWrapText(true); // Enable text wrapping
         label.setAlignment(Pos.CENTER); // Center align the text
 
@@ -110,26 +95,7 @@ public class NotificationController {
 
         Stage popupStage = new Stage();
         popupStage.setScene(scene);
-        popupStage.setTitle("Popup");
-        popupStage.initModality(Modality.WINDOW_MODAL);
-        popupStage.initOwner(stage);
-
-        popupStage.show();
-    }
-
-    private void showErrorPopup(String message) {
-        Stage popupStage = new Stage();
-        VBox popupRoot = new VBox();
-        Label label = new Label(message);
-        label.setAlignment(Pos.CENTER); // Center align the label
-        popupRoot.getChildren().add(label);
-        popupRoot.setAlignment(Pos.CENTER); // Center align the VBox
-        Scene scene = new Scene(popupRoot, 300, 100);
-
-        popupStage.setTitle("Error");
-        popupStage.setScene(scene);
-
-        // Set modal behavior
+        popupStage.setTitle("Tranquilify Notification");
         popupStage.initModality(Modality.WINDOW_MODAL);
         popupStage.initOwner(stage);
 

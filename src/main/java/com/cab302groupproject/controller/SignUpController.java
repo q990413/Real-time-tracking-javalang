@@ -53,14 +53,6 @@ public class SignUpController {
     }
 
     /**
-     * Closes the application when the Cancel button is clicked.
-     */
-    @FXML
-    protected void onCancelButtonClick() {
-        System.exit(0);
-    }
-
-    /**
      * Attempts to add a new user to the database with the entered info when the Sign Up button is clicked.
      * @throws IOException
      */
