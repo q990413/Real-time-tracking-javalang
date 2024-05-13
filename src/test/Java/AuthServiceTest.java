@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
 import static com.cab302groupproject.model.AuthService.isValidEmail;
 import static org.junit.jupiter.api.Assertions.*;
